@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="tableView">
+<div class="container-fluid">
+  <div class="topTitle">
+    <h2>Employee List</h2>
+    <p>All employees:<p>
+  </div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Position</th>
+        <th scope="col">Date of birth</th>
+      </tr>
+    </thead>
+
+    {# employee authorization #}
+    {% if employees %}
+        {% for employee in employees %}
+        <tbody>
+            <tr>
+            <th scope="row">{{employee.user_id}}</th>
+            <td>{{ employee.first_name |capfirst }}</td>
+            <td>{{ employee.last_name |capfirst}}</td>
+            <td>{{ employee.email |lower}}</td>
+            <td>{{ employee.phone}}</td>
+            <td>{{ employee.position}}</td>
+            <td>{{ employee.dob}}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+    {# non-authorized employees #}
+    {% else %}
+        <div class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Access Denied</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><em></em></p>
+                    <p><em>This page is visible to admin only.</em></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Ok</button>
+                </div>
+                </div>
+            </div>
+        </div>
+      {% endif %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+#header {
+    height: 50px;
+    color: aliceblue;
+    background-color: #343a40;
+}
+.dashboard #content {
+    width: 800px;
+}
+
+#branding h1, #branding h2{
+    color: aliceblue;
+    display: inline;
+}
+
+a:link,
+a:visited {
+    color: #343a40;
+}
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: #17a2b8 !important;
+    color: aliceblue !important;
+}
+
+.object-tools a:link, .object-tools a:visited {
+    background: #343a40;
+}
+div.breadcrumbs {
+    background-color: #343a40;
+    color: #17a2b8;
+}
+div.breadcrumbs a {
+    color: aliceblue;
+}
+#changelist #changelist-search img {
+    height: 15px;
+}
+.module h2, .module caption, .inline-group h2 {
+    background: #343a40;
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    background: #343a40;
+}
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: darkgray;
+}
+#content {
+    width: 70% !important;
+    margin: 0 auto;
+    margin-top: 100px;
+    font-size: 15px;
+}
+
+
+

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="tableView">
+<div class="container-fluid">
+  <div class="topTitle">
+    <h2>Orders Page</h2>
+    <p>Added to order:<p>
+  </div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Units</th>
+        <th scope="col">Unit of mass</th>
+        <th scope="col">Date added</th>
+        <th scope="col">Supplier</th>
+        <th scope="col">Added by</th>
+        <th scope="col">Ordered</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if orders %}
+      {% for order in orders %}
+        <tr>
+          <td>{{ order.product |capfirst }}</td>
+          <td>{{ order.units}}</td>
+          <td>{{ order.quantity}}</td>
+          <td>{{ order.date}}</td>
+          <td>{{ order.supplier}}</td>
+          {% if user.is_authenticated %}
+          <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal{{order.user_id}}">{{order.user}}</button>
+          </td>
+          {% else %}
+          <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">{{order.user}}</button>
+          </td>
+          {% endif %}
+          {# Submitted orders display checkmark #}
+          {% if order.is_ordered %}
+          <td> <img src="{% static 'images/tick.png' %}" alt="tick"> </td>
+          {% else %}
+          <td></td>
+          {% endif %}
+        </tr>
+
+        <div class="modal fade" id="exampleModal{{order.user_id}}"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="flase">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ order.user }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p><em>{{ order.user.position }}</em></p>
+                <p><em>{{ order.user.phone }}</em></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Ok</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% else %}
+      <div class="col-md-12">
+        <h2>There are no orders.</h2>
+      </div>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+</div>
+{% endblock %}

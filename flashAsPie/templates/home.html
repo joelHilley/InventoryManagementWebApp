@@ -1,0 +1,39 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="tableView">
+  <div class="topTitle">
+    <h2>Products Page</h2>
+    <p>Products in stock:<p>
+  </div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Product</th>
+        <th scope="col">Units</th>
+        <th scope="col">Unit of mass</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if products %}
+      {% for product in products %}
+        <tr>
+          <th scope="row">{{product.product_id}}</th>
+          <td>{{ product.product_name|capfirst }}</td>        
+          <td>{{ product.units}}</td>   
+          <td>{{ product.quantity}}</td>
+        </tr>
+      {% endfor %}
+      {% else %}
+      <div class="col-md-12">
+        <h2>There are no products.</h2>
+      </div>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
